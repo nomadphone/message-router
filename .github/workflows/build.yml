@@ -41,8 +41,11 @@ jobs:
       - name: vet
         run: go vet $(go list ./... | grep -v /vendor/)
 
+      - name: test
+        run: go test -v ./...
+
   build:
-    name: Build container and test
+    name: Build container 
     runs-on: ubuntu-latest
     steps:
       - name: check out code
@@ -50,7 +53,4 @@ jobs:
 
       - name: build image
         run: podman build -t message-router .
-        
-      - name: test code
-        run: podman run --rm message-router go test -v ./...
 
