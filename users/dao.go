@@ -1,9 +1,9 @@
 package users
 
 import (
+	"github.com/nomadphone/lib/database"
 	"github.com/nomadphone/lib/models"
 	"github.com/nomadphone/lib/phonenumbers"
-	"github.com/nomadphone/message-router/database"
 	"go.mongodb.org/mongo-driver/bson"
 )
 

@@ -6,7 +6,7 @@ package main
 import (
 	"log"
 
-	"github.com/nomadphone/message-router/database"
+	"github.com/nomadphone/lib/database"
 	"github.com/nomadphone/message-router/users"
 )
 
