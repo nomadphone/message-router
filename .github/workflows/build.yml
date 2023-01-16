@@ -13,18 +13,29 @@ jobs:
     steps:
       - name: check out code
         uses: actions/checkout@v2
-
+    
       - name: set up Go 1.x
         uses: actions/setup-go@v2
         with:
           go-version: 1.19
-      
+
+      - name: Verify dependencies
+        run: go mod verify
+
+      - name: build
+        run: go build -v ./...
+  
       - name: gofmt
         run: if [ "$(gofmt -s -l . | wc -l)" -gt 0 ]; then exit 1; fi
 
+      - name: staticcheck
+        run: |
+          go install honnef.co/go/tools/cmd/staticcheck@latest
+          staticcheck ./...
+
       - name: lint
         run: |
-          go get -u golang.org/x/lint/golint
+          go install golang.org/x/lint/golint@latest
           golint $(go list ./... | grep -v /vendor/)
 
       - name: vet
