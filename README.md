@@ -1,6 +1,6 @@
 # message-router
 
-[![build](https://github.com/nomadphone/message-router/actions/workflows/build.yml/badge.svg)](https://github.com/nomadphone/message-router/actions/workflows/build.yml) 
+[![build](https://github.com/nomadphone/message-router/actions/workflows/build.yml/badge.svg)](https://github.com/nomadphone/message-router/actions/workflows/build.yml)  [![codecov](https://codecov.io/github/nomadphone/message-router/branch/main/graph/badge.svg?token=8DRRQNYPLU)](https://codecov.io/github/nomadphone/message-router)
 
 ------
 
