@@ -42,7 +42,7 @@ jobs:
         run: go vet $(go list ./... | grep -v /vendor/)
 
   build:
-    name: Build
+    name: Build container and test
     runs-on: ubuntu-latest
     steps:
       - name: check out code
@@ -50,17 +50,7 @@ jobs:
 
       - name: build image
         run: podman build -t message-router .
-
-  test: 
-    name: Test
-    runs-on: ubuntu-latest
-    steps: 
-      - name: check out code
-        uses: actions/checkout@v2
-
-      - name: build image
-        run: podman build -t message-router .
-
+        
       - name: test code
         run: podman run --rm message-router go test -v ./...
 
