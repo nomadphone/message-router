@@ -55,6 +55,9 @@ jobs:
   build:
     name: build container 
     runs-on: ubuntu-latest
+    permissions:
+      packages: write
+      contents: read
     steps:
       - name: check out code
         uses: actions/checkout@v2
