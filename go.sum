@@ -26,6 +26,8 @@ github.com/nomadphone/lib v0.0.0-20230116205857-a084b2f0807e h1:Uq4Zji7P20WficbF
 github.com/nomadphone/lib v0.0.0-20230116205857-a084b2f0807e/go.mod h1:zu7pXT5W6GSonFBTHtiRK+a4NetrwFMH4QsHw2jxUFc=
 github.com/nomadphone/lib v0.0.0-20230116211245-d31ecce6b0e3 h1:sCA8qUrybBPniGgtWCTWUHhjmjSyiKM2S8BiRsNqDbw=
 github.com/nomadphone/lib v0.0.0-20230116211245-d31ecce6b0e3/go.mod h1:/NHe51fR3CiVzAgZqIGO8NrUW8LOqHJFTGlv5gU+dJ4=
+github.com/nomadphone/lib v0.0.0-20230117184134-6c29236f9b69 h1:rDKRQrnhBdXw7c6Waq1ipimqYWjyDu0ey3ukkx579HQ=
+github.com/nomadphone/lib v0.0.0-20230117184134-6c29236f9b69/go.mod h1:/NHe51fR3CiVzAgZqIGO8NrUW8LOqHJFTGlv5gU+dJ4=
 github.com/pkg/errors v0.9.1 h1:FEBLx1zS214owpjy7qsBeixbURkuhQAwrK5UwLGTwt4=
 github.com/pkg/errors v0.9.1/go.mod h1:bwawxfHBFNV+L2hUp1rHADufV3IMtnDRdf1r5NINEl0=
 github.com/pmezard/go-difflib v1.0.0/go.mod h1:iKH77koFhYxTK1pcRnkKkqfTogsbg7gZNVY4sRDYZ/4=
