@@ -5,7 +5,7 @@ image:
   pullPolicy: IfNotPresent
 
 mongo:
-  connectionOptions: "&ssl=false"
+  connectionOptions: "&ssl=true&&tls=true"
 
 serviceAccount:
   create: true
