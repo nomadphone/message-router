@@ -67,7 +67,9 @@ spec:
               valueFrom:
                 secretKeyRef:
                   name: mongo-secret
-                  key: mongo-password  
+                  key: mongo-password 
+            - name: MONGO_CONNECTION_OPTIONS
+              value: "{{ .Values.mongo.connectionOptions }}"
             - name: TWILIO_ACCOUNT_SID
               valueFrom:
                 secretKeyRef:
