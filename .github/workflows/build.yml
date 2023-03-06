@@ -73,6 +73,6 @@ jobs:
       - name: configure aws credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
-          role-to-assume: arn:aws:iam::${{secrets.AWS_ACCOUNT_ID}}:role/${{secrets.AWS_GITHUB_ROLE}}
+          role-to-assume: arn:aws:iam::${{secrets.AWS_ACCOUNT_ID}}:role/github-oidc-role
           role-session-name: PushToECR
           aws-region: ${{ env.AWS_REGION }}
