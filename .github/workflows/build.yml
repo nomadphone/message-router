@@ -7,7 +7,7 @@ on:
 
   
 env:
-  IMAGE_REGISTRY: 040675146174.dkr.ecr.us-east-1.amazonaws.com/nomadphone
+  IMAGE_REGISTRY: 040675146174.dkr.ecr.us-east-1.amazonaws.com
   
 jobs:
   lint-and-test:
@@ -64,6 +64,12 @@ jobs:
           role-to-assume: arn:aws:iam::040675146174:role/github-oidc-role
           role-session-name: PushToECR
           aws-region: us-east-1
+
+      - name: Log in to AWS ECR
+        uses: redhat-actions/podman-login@v1
+        with:
+          registry: ${{ env.IMAGE_REGISTRY }}
+
           
       - name: check out code
         uses: actions/checkout@v2
@@ -71,7 +77,7 @@ jobs:
       - name: build image
         run: |
           podman build -t message-router .
-          podman tag message-router ${{ env.IMAGE_REGISTRY }}/message-router:${{ github.sha }}
+          podman tag message-router ${{ env.IMAGE_REGISTRY }}/nomadphone/message-router:${{ github.sha }}
           
       - name: push image
-        run: podman push ${{ env.IMAGE_REGISTRY }}/message-router:${{ github.sha }}
+        run: podman push ${{ env.IMAGE_REGISTRY }}/nomadphone/message-router:${{ github.sha }}
