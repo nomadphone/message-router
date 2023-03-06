@@ -62,7 +62,7 @@ jobs:
       contents: read
     steps:
       - name: configure aws credentials
-        uses: aws-actions/configure-aws-credentials@v1
+        uses: aws-actions/configure-aws-credentials@master
         with:
           role-to-assume: arn:aws:iam::${{secrets.AWS_ACCOUNT_ID}}:role/github-oidc-role
           role-session-name: PushToECR
