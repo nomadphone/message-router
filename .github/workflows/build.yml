@@ -6,11 +6,16 @@ on:
   pull_request:
     branches: [main]
 
+permissions:
+  id-token: write # This is required for requesting the JWT
+  contents: read  # This is required for actions/checkout
+  
 env:
-  REGISTRY_USER: ${{ github.actor }}
-  REGISTRY_PASSWORD: ${{ github.token }}
   IMAGE_REGISTRY: ghcr.io/${{ github.repository_owner }}
-
+  AWS_REGION : "us-east-1"
+  AWS_ACCOUNT_ID: ${{secrets.AWS_ACCOUNT_ID}}
+  AWS_GITHUB_ROLE: ${{secrets.AWS_GITHUB_ROLE}}
+  
 jobs:
   lint-and-test:
     name: lint and test
@@ -67,16 +72,9 @@ jobs:
           podman build -t message-router .
           podman tag message-router ${{ env.IMAGE_REGISTRY }}/message-router:${{ github.sha }}
 
-      - name: login to registry
-        uses: redhat-actions/podman-login@v1
-        if: github.ref == 'refs/heads/main'
+      - name: configure aws credentials
+        uses: aws-actions/configure-aws-credentials@v1
         with:
-          username: ${{ env.REGISTRY_USER }}
-          password: ${{ env.REGISTRY_PASSWORD }}
-          registry: ${{ env.IMAGE_REGISTRY }}
-      
-      - name: push if main
-        if: github.ref == 'refs/heads/main'
-        run: |
-          podman push ${{ env.IMAGE_REGISTRY }}/message-router:${{ github.sha }}
-
+          role-to-assume: arn:aws:iam::${{env.AWS_ACCOUNT_ID}}:role/${{env.AWS_GITHUB_ROLE}}
+          role-session-name: PushToECR
+          aws-region: ${{ env.AWS_REGION }}
