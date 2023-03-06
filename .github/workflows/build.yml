@@ -12,7 +12,6 @@ permissions:
   
 env:
   IMAGE_REGISTRY: ghcr.io/${{ github.repository_owner }}
-  AWS_REGION : "us-east-1"
   
 jobs:
   lint-and-test:
@@ -62,6 +61,13 @@ jobs:
       packages: write
       contents: read
     steps:
+      - name: configure aws credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          role-to-assume: arn:aws:iam::${{secrets.AWS_ACCOUNT_ID}}:role/github-oidc-role
+          role-session-name: PushToECR
+          aws-region: us-east-1
+          
       - name: check out code
         uses: actions/checkout@v2
 
@@ -69,10 +75,3 @@ jobs:
         run: |
           podman build -t message-router .
           podman tag message-router ${{ env.IMAGE_REGISTRY }}/message-router:${{ github.sha }}
-
-      - name: configure aws credentials
-        uses: aws-actions/configure-aws-credentials@v1
-        with:
-          role-to-assume: arn:aws:iam::${{secrets.AWS_ACCOUNT_ID}}:role/github-oidc-role
-          role-session-name: PushToECR
-          aws-region: ${{ env.AWS_REGION }}
