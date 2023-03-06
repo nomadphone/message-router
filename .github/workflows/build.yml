@@ -78,8 +78,7 @@ jobs:
 
       - name: build image
         run: |
-          podman build -t message-router .
-          podman tag message-router ${{ env.IMAGE_REGISTRY }}/nomadphone/message-router:${{ github.sha }}
+          podman build -t ${{ env.IMAGE_REGISTRY }}/nomadphone/message-router:${{ github.sha }} .
           
       - name: push image
         run: podman push ${{ env.IMAGE_REGISTRY }}/nomadphone/message-router:${{ github.sha }}
