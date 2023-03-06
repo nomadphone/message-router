@@ -7,7 +7,7 @@ on:
 
   
 env:
-  IMAGE_REGISTRY: ghcr.io/${{ github.repository_owner }}
+  IMAGE_REGISTRY: 040675146174.dkr.ecr.us-east-1.amazonaws.com/nomadphone
   
 jobs:
   lint-and-test:
@@ -72,3 +72,6 @@ jobs:
         run: |
           podman build -t message-router .
           podman tag message-router ${{ env.IMAGE_REGISTRY }}/message-router:${{ github.sha }}
+          
+      - name: push image
+        run: podman push ${{ env.IMAGE_REGISTRY }}/message-router:${{ github.sha }}
