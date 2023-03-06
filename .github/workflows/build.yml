@@ -66,10 +66,12 @@ jobs:
           aws-region: us-east-1
 
       - name: Log in to AWS ECR
-        uses: redhat-actions/podman-login@v1
-        with:
-          registry: ${{ env.IMAGE_REGISTRY }}
-
+        run: |
+          aws ecr get-login-password --region us-east-1 | \
+          podman login \
+          --username AWS \
+          --password-stdin \
+          ${{ env.IMAGE_REGISTRY }}
           
       - name: check out code
         uses: actions/checkout@v2
