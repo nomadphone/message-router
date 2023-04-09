@@ -7,7 +7,7 @@ on:
 
   
 env:
-  IMAGE_REGISTRY: 040675146174.dkr.ecr.us-east-1.amazonaws.com
+  IMAGE_REGISTRY: us-docker.pkg.dev
   
 jobs:
   lint-and-test:
@@ -58,18 +58,24 @@ jobs:
       contents: read
       id-token: write 
     steps:
-      - name: configure aws credentials
-        uses: aws-actions/configure-aws-credentials@master
+      - id: 'auth'
+        uses: 'google-github-actions/auth@v1'
         with:
-          role-to-assume: arn:aws:iam::040675146174:role/github-oidc-role
-          role-session-name: PushToECR
-          aws-region: us-east-1
+          credentials_json: '${{ secrets.GCP_CREDENTIALS }}'
+
+      - name: 'Set up Cloud SDK'
+        uses: 'google-github-actions/setup-gcloud@v1'
+        with:
+          version: '>= 363.0.0'
+
+      - name: 'Use gcloud CLI'
+        run: 'gcloud info'
 
       - name: Log in to AWS ECR
         run: |
-          aws ecr get-login-password --region us-east-1 | \
+          gcloud auth print-access-token | \
           podman login \
-          --username AWS \
+          --username oauth2accesstoken \
           --password-stdin \
           ${{ env.IMAGE_REGISTRY }}
           
