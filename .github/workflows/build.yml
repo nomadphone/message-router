@@ -88,3 +88,4 @@ jobs:
           
       - name: push image
         run: podman push ${{ env.IMAGE_REGISTRY }}/nomadphone/message-router/message-router:${{ github.sha }}
+
